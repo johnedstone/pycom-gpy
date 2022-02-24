@@ -22,6 +22,21 @@ Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django R
     * Currently no firmware upgrade is needed [as described here](https://docs.pycom.io/updatefirmware/ltemodem/)
     * If a firmware upgrade is required, then probably do `sudo apt install python3-serial` and [follow link's](https://docs.pycom.io/updatefirmware/ltemodem/) instructions
 
+### References 
+* [Pycom documentation](https://docs.pycom.io/)
+* [The pyboard.py tool](https://docs.micropython.org/en/latest/reference/pyboard.py.html)
+* Useful debugging: see Readme_debugging.md
+
+### Commands to be used with pyboard.py as compared to the Atom editor
+```
+../../pyboard.py -f cp main.py :main.py && ../../pyboard.py -f cp lib/arduino_get_https.py :lib/arduino_get_https.py
+../../pyboard.py -c "import machine;machine.reset()"
+../../pyboard.py -f ls
+```
+
+### See related sketch
+* [Arduino related sketches MKRGSM1400 (public)](https://github.com/johnedstone/mkrgsm1400-post-json-ssl)
+
 <!---
 # vim: ai et ts=4 sw=4 sts=4 nu
 -->
