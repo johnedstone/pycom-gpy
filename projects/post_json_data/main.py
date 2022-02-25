@@ -16,7 +16,7 @@ from helper_functions import (
     get_IMEI,
     )
 
-print('Starting "Simple Project"')
+print('Starting "Post JSON Data Project"')
 
 sleeping = 3600 - 30 # 1 hour
 #sleeping = 900 - 30 # 15 min

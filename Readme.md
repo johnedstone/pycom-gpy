@@ -28,10 +28,30 @@ Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django R
 * Useful debugging: see Readme_debugging.md
 
 ### Commands to be used with pyboard.py as compared to the Atom editor
+Sometimes Atom and the Pymakr plugin do not always work, e.g. failed to upload.
+Resolve these type of issues with pyboard.py using virtual environment (see Pipfile)
+
 ```
-../../pyboard.py -f cp main.py :main.py && ../../pyboard.py -f cp lib/arduino_get_https.py :lib/arduino_get_https.py
-../../pyboard.py -c "import machine;machine.reset()"
-../../pyboard.py -f ls
+./pyboard.py -f rm :main.py
+rm :main.py
+
+./pyboard.py -f ls :
+ls :
+          29 boot.py
+           0 cert/
+           0 lib/
+          34 main.py
+           0 sys/
+
+./pyboard.py -f cat :main.py
+cat :main.py
+# main.py -- put your code here!
+
+# Run this script in memory
+./pyboard.py simple_files/hello_world/main.py
+Hello!
+Hello!
+
 ```
 
 ### See related sketch
