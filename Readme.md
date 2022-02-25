@@ -29,7 +29,8 @@ Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django R
 
 ### Commands to be used with pyboard.py as compared to the Atom editor
 Sometimes Atom and the Pymakr plugin do not always work, e.g. failed to upload.
-Resolve these type of issues with pyboard.py using virtual environment (see Pipfile)
+Resolve these type of issues after downloading [pyboard.py](./pyboard.py simple_files/get_https/main.py)
+and using the virtual environment (see Pipfile).  Some examples are below.
 
 ```
 #Cleaning up
@@ -54,7 +55,7 @@ cat :main.py
 Hello!
 Hello!
 
-#Run this project in memory after loading libraris
+#Run this project in memory after loading libraries
 ./pyboard.py -f cp projects/hello_world/lib/helper_functions.py :lib/
 cp projects/hello_world/lib/helper_functions.py :lib/helper_functions.py
 
@@ -71,6 +72,8 @@ msg: Goodnight Moon!
 msg: Goodnight Moon!
 msg: Goodnight Moon!
 
+#Another example of testing a script before uploading it
+./pyboard.py simple_files/get_https/main.py
 
 ```
 

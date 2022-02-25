@@ -53,6 +53,7 @@ rtc_status = rtc.synced()
 while not rtc_status:
     rtc_status = rtc.synced()
     print("rtc_status: {}".format(rtc_status))
+    print("This may take several minutes - be patient")
     time.sleep(1)
 
 print("RTC synced with NTP time")
