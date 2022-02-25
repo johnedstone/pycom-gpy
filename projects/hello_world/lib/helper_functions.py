@@ -1,7 +1,6 @@
-#import private_vars
+import private_vars
 
-def get_hello_world():
-    #return f'{private_vars.msg}'
-    return 'boo'
+def hello_world():
+    return '{}'.format(private_vars.msg)
 
 # vim: ai et ts=4 sw=4 sts=4 nu

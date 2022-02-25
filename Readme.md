@@ -32,6 +32,7 @@ Sometimes Atom and the Pymakr plugin do not always work, e.g. failed to upload.
 Resolve these type of issues with pyboard.py using virtual environment (see Pipfile)
 
 ```
+#Cleaning up
 ./pyboard.py -f rm :main.py
 rm :main.py
 
@@ -43,14 +44,33 @@ ls :
           34 main.py
            0 sys/
 
+#Default main.py
 ./pyboard.py -f cat :main.py
 cat :main.py
 # main.py -- put your code here!
 
-# Run this script in memory
+#Run this script in memory
 ./pyboard.py simple_files/hello_world/main.py
 Hello!
 Hello!
+
+#Run this project in memory after loading libraris
+./pyboard.py -f cp projects/hello_world/lib/helper_functions.py :lib/
+cp projects/hello_world/lib/helper_functions.py :lib/helper_functions.py
+
+./pyboard.py -f cat :lib/helper_functions.py
+cat :lib/helper_functions.py
+import private_vars
+
+def hello_world():
+    return '{}'.format(private_vars.msg)
+
+./pyboard.py projects/hello_world/main.py
+Starting "Hello World Project"
+msg: Goodnight Moon!
+msg: Goodnight Moon!
+msg: Goodnight Moon!
+
 
 ```
 

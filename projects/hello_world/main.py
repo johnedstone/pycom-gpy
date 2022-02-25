@@ -5,18 +5,17 @@ Device:
 """
 import time
 
-from helper_functions import get_hello_world
+from helper_functions import hello_world
 
 print('Starting "Hello World Project"')
-'''
+
 while True:
-    print('Starting "Hello World Project"')
     try:
         msg = hello_world()
-        print(f'{msg}')
+        print('msg: {}'.format(msg))
     except Exception as e:
-        print(f'{e}')
+        print('error: {}'.format(e))
     finally:
         time.sleep(1)
-'''
+
 # vim: ai et ts=4 sts=4 sw=4 nu
