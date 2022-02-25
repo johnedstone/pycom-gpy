@@ -76,6 +76,24 @@ msg: Goodnight Moon!
 ./pyboard.py simple_files/get_https/main.py
 
 ```
+### Serial connections.
+In addition to the `pyboard.py` tool (above), one can enter the REPL with a serial connection
+
+For example:
+```
+screen /dev/ttyACM0 115200
+#or,
+screen /dev/ttyACM0 115200 -hupc
+
+#Or, starting with pyboard
+./pyboard.py --no-exclusive simple_files/hello_world/main.py
+#then, Ctrl-C, exiting, and then to follow the output
+screen /dev/ttyACM0 115200 -hupc
+#and to drop to a python prompt: Ctrl-C Ctrl-B
+>>>
+>>> help()
+
+```
 
 ### See related sketch
 * [Arduino related sketches MKRGSM1400 (public)](https://github.com/johnedstone/mkrgsm1400-post-json-ssl)
