@@ -1,6 +1,9 @@
 ### Description
 Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django REST Framework](https://www.django-rest-framework.org/)
 
+### Currently (unfinished)
+Currently working on `post_json_data` in projects folder
+
 ### Firmware
 * Upgrade Pytrack 2 firmware as described at this [link](https://docs.pycom.io/updatefirmware/expansionboard/)
 * Upgrade GPy as described at this [link, for USB](https://docs.pycom.io/updatefirmware/ltemodem/)
