@@ -29,21 +29,18 @@ def convert_time(seconds):
 
 def sync_time(rtc):
     try:
-        print('Starting sync_time: {}'.format(time.localtime()))
+        print('Starting sync_time: {}'.format(rtc.now()))
     
         rtc.ntp_sync("pool.ntp.org")
     
-        rtc_status = rtc.synced()
-        while not rtc_status:
-            rtc_status = rtc.synced()
-            print("rtc_status: {} - this may take a few minutes".format(rtc_status))
+        while not rtc.synced():
+            machine.idle()
+            print('syncing with ntp ... this may take a minute or two')
             time.sleep(1)
     
-        startup_time = time.localtime()
+        startup_time = rtc.now()
         print("RTC synced with NTP time: {}".format(startup_time))
-        # epoch time
-        print('{}'.format(time.time()))
-        return time.time()
+        return startup_time
 
     except Exception as e:
         print("convert_time error: {}".format(e))
@@ -138,7 +135,6 @@ def make_request (uptime, IMEI, start_time=0):
         # Terminate headers
         ss.write(b'\r\n')
         ss.send(posting)
-        print('{}'.format(posting))
         
         #print(ss.read(4096))
     

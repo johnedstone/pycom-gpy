@@ -28,18 +28,20 @@ IMEI = lte.imei()
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
 
-startup_time = sync_time(rtc)
+startup_time = time.mktime(sync_time(rtc))
+print('Startup time is {}'.format(startup_time))
 
 while True:
     try:
-        uptime = convert_time(time.time() - startup_time)
+        now = rtc.now()
+        uptime = convert_time(time.mktime(now) - startup_time)
         make_request(uptime, IMEI, startup_time)
     
         lte.deinit(reset=True)
 
         print(uptime)
         print("lte.deinit() completed")
-        print("Current time is : {}".format(time.localtime()))
+        print("Current time is {}".format(now))
     
         print("Sleeping for {} min {} sec".format(sleeping // 60, sleeping % 60))
     except Exception as e:
