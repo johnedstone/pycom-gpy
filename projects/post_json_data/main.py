@@ -39,7 +39,7 @@ startup_time = sync_time(rtc)
 while True:
     try:
         uptime = convert_time(time.time() - startup_time)
-        make_request(uptime, IMEI)
+        make_request(uptime, IMEI, startup_time)
     
         lte.deinit(reset=True)
 

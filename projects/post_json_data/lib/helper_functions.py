@@ -36,7 +36,7 @@ def sync_time(rtc):
         rtc_status = rtc.synced()
         while not rtc_status:
             rtc_status = rtc.synced()
-            print("rtc_status: {}".format(rtc_status))
+            print("rtc_status: {} - this may take a few minutes".format(rtc_status))
             time.sleep(1)
     
         startup_time = time.localtime()
@@ -102,11 +102,12 @@ def get_IMEI(lte, IMEI):
         print("get_IMEI error #2: {}".format(e))
 
 
-def make_request (uptime, IMEI):
+def make_request (uptime, IMEI, start_time=0):
     try:
         posting = json.dumps({
             'uptime': uptime,
             'imei_string': IMEI,
+            'start_time': start_time,
             })
 
         s = socket.socket()
@@ -136,6 +137,7 @@ def make_request (uptime, IMEI):
         # Terminate headers
         ss.write(b'\r\n')
         ss.send(posting)
+        print('{}'.format(posting))
         
         #print(ss.read(4096))
     
