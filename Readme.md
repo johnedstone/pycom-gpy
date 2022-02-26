@@ -31,6 +31,15 @@ Currently working on `post_json_data` in projects folder
 * [The pyboard.py tool](https://docs.micropython.org/en/latest/reference/pyboard.py.html)
 * Useful debugging: see Readme_debugging.md
 
+### private_vars.py
+See `sample_private_vars.py` for an example. Used for private (secret) variables.  Create
+a file, `lib/private_vars.py' and use as follows:
+
+```
+import private_vars
+server = private_vars.HOST
+```
+
 ### Commands to be used with pyboard.py as compared to the Atom editor
 Sometimes Atom and the Pymakr plugin do not always work, e.g. failed to upload.
 Resolve these type of issues after downloading [pyboard.py](./pyboard.py simple_files/get_https/main.py)

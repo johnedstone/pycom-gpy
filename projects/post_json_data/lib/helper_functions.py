@@ -29,7 +29,7 @@ def convert_time(seconds):
 
 def sync_time(rtc):
     try:
-        print(time.localtime())
+        print('Starting sync_time: {}'.format(time.localtime()))
     
         rtc.ntp_sync("pool.ntp.org")
     
@@ -42,6 +42,7 @@ def sync_time(rtc):
         startup_time = time.localtime()
         print("RTC synced with NTP time: {}".format(startup_time))
         # epoch time
+        print('{}'.format(time.time()))
         return time.time()
 
     except Exception as e:

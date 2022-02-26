@@ -18,9 +18,9 @@ from helper_functions import (
 
 print('Starting "Post JSON Data Project"')
 
-sleeping = 3600 - 30 # 1 hour
+#sleeping = 3600 - 30 # 1 hour
 #sleeping = 900 - 30 # 15 min
-#sleeping = 60 # 1 min
+sleeping = 60 # 1 min
 
 rtc = RTC()
 lte = LTE()
@@ -47,7 +47,7 @@ while True:
         print("lte.deinit() completed")
         print("Current time is : {}".format(time.localtime()))
     
-        print("Sleeping for a {} min {} sec".format(sleeping // 60, sleeping % 60))
+        print("Sleeping for {} min {} sec".format(sleeping // 60, sleeping % 60))
     except Exception as e:
         print("error making request and then lte.deinit(): {} ".format(e))
 
