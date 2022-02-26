@@ -13,7 +13,6 @@ from helper_functions import (
     make_request,
     sync_time,
     convert_time,
-    get_IMEI,
     )
 
 print('Starting "Post JSON Data Project"')
@@ -28,11 +27,6 @@ IMEI = lte.imei()
 
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
-
-## not needed, but has been tested, but could be used as a  "safety net"
-#IMEI = get_IMEI(lte, IMEI)
-
-# raise AssertionError("stopping")
 
 startup_time = sync_time(rtc)
 

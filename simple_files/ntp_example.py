@@ -22,6 +22,7 @@ time.timezone(2*60**2) #we are located at GMT+2, thus 2*60*60
 
 while True:
     print(time.localtime())
+    print(rtc.now())
     time.sleep(1)
 
 # vim: ai et ts=4 sts=4 sw=4 nu
