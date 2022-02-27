@@ -28,14 +28,14 @@ while not lte.isconnected():
 print("] connected!")
 
 s = socket.socket()
-ai = socket.getaddrinfo("example.org", 443)
+ai = socket.getaddrinfo("www.example.org", 443)
 addr = ai[0][-1]
 
 path = "/"
 host = "HOST: example.org"
 
-ss = ssl.wrap_socket(s)
-#ss = ssl.wrap_socket(s, cert_reqs=ssl.CERT_REQUIRED, ca_certs='/flash/cert/ca.pem')
+#ss = ssl.wrap_socket(s)
+ss = ssl.wrap_socket(s, cert_reqs=ssl.CERT_REQUIRED, ca_certs='/flash/cert/ca.pem')
 ss.connect(addr)
 
 ss.write(b"GET {} HTTP/1.0\r\n{}\r\nConnection:close\r\n\r\n".format(path, host))
