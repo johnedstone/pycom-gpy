@@ -28,11 +28,14 @@ while not lte.isconnected():
 print("] connected!")
 
 s = socket.socket()
-ai = socket.getaddrinfo("www.example.org", 443)
+
+# not working with LetsEncrypt certs
+#ai = socket.getaddrinfo("www.example.org", 443) # this works with certs
+ai = socket.getaddrinfo("www.google.com", 443) # works with certs
 addr = ai[0][-1]
 
 path = "/"
-host = "HOST: example.org"
+host = "HOST: www.google.com"
 
 #ss = ssl.wrap_socket(s)
 ss = ssl.wrap_socket(s, cert_reqs=ssl.CERT_REQUIRED, ca_certs='/flash/cert/ca.pem')
