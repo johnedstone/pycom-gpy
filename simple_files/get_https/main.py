@@ -8,6 +8,10 @@ import ssl
 from network import LTE
 import machine
 
+HOST = "some-another.server.net" # Let's Encrypt - does not work
+HOST = "www.google.com" # works
+HOST = "www.example.org" # works
+
 lte = LTE()
 lte.attach()
 print("attaching..",end='')
@@ -29,13 +33,11 @@ print("] connected!")
 
 s = socket.socket()
 
-# not working with LetsEncrypt certs
-#ai = socket.getaddrinfo("www.example.org", 443) # this works with certs
-ai = socket.getaddrinfo("www.google.com", 443) # works with certs
+ai = socket.getaddrinfo('{}'.format(HOST), 443)
 addr = ai[0][-1]
 
 path = "/"
-host = "HOST: www.google.com"
+host = 'HOST: {}'.format(HOST)
 
 #ss = ssl.wrap_socket(s)
 ss = ssl.wrap_socket(s, cert_reqs=ssl.CERT_REQUIRED, ca_certs='/flash/cert/ca.pem')

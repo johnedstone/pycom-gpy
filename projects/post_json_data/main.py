@@ -17,9 +17,9 @@ from helper_functions import (
 
 print('Starting "Post JSON Data Project"')
 
-#sleeping = 3600 - 30 # 1 hour
+sleeping = 3600 - 30 # 1 hour
 #sleeping = 900 - 30 # 15 min
-sleeping = 60 # 1 min
+#sleeping = 60 # 1 min
 
 rtc = RTC()
 lte = LTE()
