@@ -13,9 +13,9 @@ from helper_functions import (
     make_request,
     sync_time,
     convert_time,
+    get_gps_info,
     )
 
-print('Starting "Post JSON Data Project"')
 
 sleeping = 3600 - 30 # 1 hour
 #sleeping = 900 - 30 # 15 min
@@ -24,6 +24,15 @@ sleeping = 3600 - 30 # 1 hour
 rtc = RTC()
 lte = LTE()
 IMEI = lte.imei()
+
+choices = { 1: 'pytrack',
+            2: 'pysense',
+            3: 'other',
+          }
+
+report_choice = choices[1]
+
+print('Starting "post_json_data project"')
 
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
@@ -35,7 +44,8 @@ while True:
     try:
         now = rtc.now()
         uptime = convert_time(time.mktime(now) - startup_time)
-        make_request(uptime, IMEI, startup_time)
+        coord = get_gps_info(report_choice)
+        make_request(uptime, IMEI, startup_time, coord)
     
         lte.deinit(reset=True)
 

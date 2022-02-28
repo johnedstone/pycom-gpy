@@ -117,5 +117,3 @@ class L76GNSS:
 
     def write(self, data):
         self.i2c.writeto(GPS_I2CADDR, '${}*{}\r\n'.format(data, self._checksum(data)) )
-
-# vim: ai et ts=4 sw=4 sts=4 nu

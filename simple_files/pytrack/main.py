@@ -17,7 +17,7 @@ import utime
 import gc
 import pycom
 from machine import RTC
-from machine import SD
+#from machine import SD
 from L76GNSS import L76GNSS
 from pycoproc_2 import Pycoproc
 
@@ -66,4 +66,3 @@ time.sleep(3)
 py.setup_sleep(10)
 py.go_to_sleep()
 """
-

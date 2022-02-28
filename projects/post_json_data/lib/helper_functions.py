@@ -7,6 +7,9 @@ import json
 import machine
 import private_vars
 
+from L76GNSS import L76GNSS
+from pycoproc_2 import Pycoproc
+
 def convert_time(seconds):
     """
     https://www.tutsmake.com/python-convert-time-in-seconds-to-days-hours-minutes-seconds/
@@ -100,12 +103,14 @@ def get_IMEI(lte, IMEI):
         print("get_IMEI error #2: {}".format(e))
 
 
-def make_request (uptime, IMEI, start_time=0):
+def make_request (uptime, IMEI, start_time, coord):
     try:
         posting = json.dumps({
             'uptime': uptime,
             'imei_string': IMEI,
             'start_time': start_time,
+            'latitude': coord[0],
+            'longitude': coord[1],
             })
 
         s = socket.socket()
@@ -149,5 +154,28 @@ def make_request (uptime, IMEI, start_time=0):
         print("Request complete, good night ...")
     except Exception as e:
         print("make_request error: {}".format(e))
+
+
+def get_gps_info(report_choice):
+    '''
+    https://github.com/pycom/pycom-libraries/blob/master/shields/pytrack_2.py
+    '''
+    coord = ('0', '0')
+    if report_choice != 'pytrack':
+        return coord
+
+    try:
+        py = Pycoproc()
+        if py.read_product_id() != Pycoproc.USB_PID_PYTRACK:
+            raise Exception('Not a Pytrack')
+
+        time.sleep(1)
+        l76 = L76GNSS(py, timeout=30, buffer=512)
+        coord = l76.coordinates()
+    except Exception as e:
+        print('get_gps_info: {}'.format(e))
+    finally:
+        return coord
+
 
 # vim: ai et ts=4 sw=4 sts=4 nu
