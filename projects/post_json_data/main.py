@@ -55,7 +55,7 @@ while True:
     
         print("Sleeping for {} min {} sec".format(sleeping // 60, sleeping % 60))
     except Exception as e:
-        print("error making request and then lte.deinit(): {} ".format(e))
+        print("==== ERROR ==== making request, followed by lte.deinit(): {} ".format(e))
 
     time.sleep(sleeping)
 
@@ -66,7 +66,7 @@ while True:
         print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
         print("Is rtc synced: {}".format(rtc.synced()))
     except Exception as e:
-        print("error starting over: {}".format(e))
+        print("==== ERROR ==== starting over: {}".format(e))
         print("Reseting modem and trying again")
         lte.reset()
         lte.init()
