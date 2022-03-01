@@ -8,9 +8,9 @@ import ssl
 from network import LTE
 import machine
 
+HOST = "some-server-with-letsencyrpt.certs.net" # Let's Encrypt certs - does not work
 HOST = "www.google.com" # works
 HOST = "www.example.org" # works
-HOST = "arduino.johnedstone.net" # Let's Encrypt certs - does not work
 
 lte = LTE()
 lte.attach()
