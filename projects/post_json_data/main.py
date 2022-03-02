@@ -2,6 +2,7 @@
 Device:
     Gpy (firmware, latest: shipped with CAT-M1 5.4.1.0-50523) on
     Pytrack 2 (firmware, latest: pytrack2_v16.dfu)
+    Not yet: Pysense 2 (firmware, latest: pysense2_v16.dfu)
 """
 import time
 
@@ -45,6 +46,7 @@ while True:
         now = rtc.now()
         uptime = convert_time(time.mktime(now) - startup_time)
         coord = get_gps_info(report_choice)
+        print('coord: {}'.format(coord))
         make_request(uptime, IMEI, startup_time, coord)
     
         lte.deinit(reset=True)

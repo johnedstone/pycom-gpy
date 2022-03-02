@@ -1,3 +1,7 @@
+'''
+pytracke_2.py
+plus LTE
+'''
 #!/usr/bin/env python
 #
 # Copyright (c) 2020, Pycom Limited.
@@ -20,6 +24,27 @@ from machine import RTC
 #from machine import SD
 from L76GNSS import L76GNSS
 from pycoproc_2 import Pycoproc
+
+from network import LTE
+
+lte = LTE()
+lte.attach()
+print("attaching..",end='')
+while not lte.isattached():
+    time.sleep(0.25)
+
+    print('.',end='')
+    print(lte.send_at_cmd('AT!="fsm"'))         # get the System FSM
+print("attached!")
+
+lte.connect()
+print("connecting [##",end='')
+while not lte.isconnected():
+    time.sleep(0.25)
+    print('#',end='')
+    #print(lte.send_at_cmd('AT!="showphy"'))
+    print(lte.send_at_cmd('AT!="fsm"'))
+print("] connected!")
 
 pycom.heartbeat(False)
 pycom.rgbled(0x0A0A08) # white
