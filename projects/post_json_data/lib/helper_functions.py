@@ -175,6 +175,8 @@ def get_gps_info(report_choice):
     except Exception as e:
         print('get_gps_info: {}'.format(e))
     finally:
+        if not coord: # that is if l76.coordnates() returns None
+            coord = ('0', '0')
         return coord
 
 
