@@ -2,8 +2,8 @@
 Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django REST Framework](https://www.django-rest-framework.org/)
 * Using a Hologram.io SIM
 
-### Currently (unfinished)
-Currently working on `post_json_data` in projects folder
+### Current project 
+Currently `post_json_data` reports uptime and GPS every hour.
 
 ### Firmware
 * Upgrade Pytrack 2 firmware as described at this [link](https://docs.pycom.io/updatefirmware/expansionboard/)
