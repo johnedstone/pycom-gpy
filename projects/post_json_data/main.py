@@ -62,7 +62,7 @@ while True:
 
     # Let's take into account how long the above took
     time_expired = max(time.time() - t0, 0)
-    print("Need to test this ==> 'time_expired': {}".format(time_expired))
+    print("Need to test this, i.e. has not been tested ==> 'time_expired': {}".format(time_expired))
     time.sleep(sleeping - time_expired)
 
     ## Start over, no need to set startup_time
