@@ -59,7 +59,10 @@ while True:
     except Exception as e:
         print("==== ERROR ==== making request, followed by lte.deinit(): {} ".format(e))
 
-    time.sleep(sleeping)
+    # Let's take into account how long the above took
+    time_expired = max(rtc.now() - now, 0)
+    print("Need to test this ==> 'time_expired': {}".format(time_expired))
+    time.sleep(sleeping - time_expired)
 
     ## Start over, no need to set startup_time
     try:
