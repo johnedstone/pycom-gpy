@@ -18,9 +18,9 @@ from helper_functions import (
     )
 
 
-sleeping = 3600 - 30 # 1 hour
-#sleeping = 900 - 30 # 15 min
-#sleeping = 60 # 1 min
+sleeping = 3600 # 1 hour
+#sleeping = 900 # 15 min
+#sleeping = 60  # 1 min
 
 rtc = RTC()
 lte = LTE()
@@ -44,6 +44,7 @@ print('Startup time is {}'.format(startup_time))
 while True:
     try:
         now = rtc.now()
+        t0 = time.time()
         uptime = convert_time(time.mktime(now) - startup_time)
         coord = get_gps_info(report_choice)
         print('coord: {}'.format(coord))
@@ -60,7 +61,7 @@ while True:
         print("==== ERROR ==== making request, followed by lte.deinit(): {} ".format(e))
 
     # Let's take into account how long the above took
-    time_expired = max(rtc.now() - now, 0)
+    time_expired = max(time.time() - t0, 0)
     print("Need to test this ==> 'time_expired': {}".format(time_expired))
     time.sleep(sleeping - time_expired)
 
