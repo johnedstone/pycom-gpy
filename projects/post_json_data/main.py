@@ -18,9 +18,9 @@ from helper_functions import (
     )
 
 
-#sleeping = 3600 # 1 hour
+sleeping = 3600 # 1 hour
 #sleeping = 900 # 15 min
-sleeping = 60  # 1 min
+#sleeping = 60  # 1 min
 
 rtc = RTC()
 lte = LTE()
@@ -48,7 +48,7 @@ while True:
         uptime = convert_time(time.mktime(now) - startup_time)
         coord = get_gps_info(report_choice)
         print('coord: {}'.format(coord))
-        #make_request(uptime, IMEI, startup_time, coord)
+        make_request(uptime, IMEI, startup_time, coord)
     
         lte.deinit(reset=True)
 
