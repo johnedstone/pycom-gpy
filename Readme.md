@@ -47,10 +47,10 @@ and using the virtual environment (see Pipfile).  Some examples are below.
 
 ```
 #Cleaning up
-./pyboard.py -f rm :main.py
+./pyboard.py --no-soft-reset -f rm :main.py
 rm :main.py
 
-./pyboard.py -f ls :
+./pyboard.py --no-soft-reset -f ls :
 ls :
           29 boot.py
            0 cert/
@@ -106,8 +106,16 @@ screen /dev/ttyACM0 115200 -hupc
 >>>
 >>> help()
 
+#Note: Ctrl-F will dump everything and restart the program, the Ctrl-C
 ```
 
+### screen logging
+```
+#https://fvdm.com/code/howto-write-screen-output-to-a-log-file
+screen -dmS test -L /dev/ttyACM0 115200
+screen -S test -X colon "logfile flush 0^M"
+tail -Fn 0 screenlog.0
+```
 ### See related sketch
 * [Arduino related sketches MKRGSM1400 (public)](https://github.com/johnedstone/mkrgsm1400-post-json-ssl)
 

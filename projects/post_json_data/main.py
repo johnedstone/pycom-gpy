@@ -18,9 +18,9 @@ from helper_functions import (
     )
 
 
-sleeping = 3600 # 1 hour
+#sleeping = 3600 # 1 hour
 #sleeping = 900 # 15 min
-#sleeping = 60  # 1 min
+sleeping = 60  # 1 min
 
 rtc = RTC()
 lte = LTE()
@@ -48,7 +48,7 @@ while True:
         uptime = convert_time(time.mktime(now) - startup_time)
         coord = get_gps_info(report_choice)
         print('coord: {}'.format(coord))
-        make_request(uptime, IMEI, startup_time, coord)
+        #make_request(uptime, IMEI, startup_time, coord)
     
         lte.deinit(reset=True)
 
@@ -56,14 +56,13 @@ while True:
         print("lte.deinit() completed")
         print("Current time is {}".format(now))
     
-        print("Sleeping for {} min {} sec".format(sleeping // 60, sleeping % 60))
     except Exception as e:
         print("==== ERROR ==== making request, followed by lte.deinit(): {} ".format(e))
 
-    # Let's take into account how long the above took
-    time_expired = max(time.time() - t0, 0)
-    print("Need to test this, i.e. has not been tested ==> 'time_expired': {}".format(time_expired))
-    time.sleep(sleeping - time_expired)
+    time_expired = time.time() - t0
+    real_sleep = (max(sleeping - time_expired, 0))
+    print("sleep interval: {}, time_expired: {}, real_sleep: {}".format(sleeping, time_expired, real_sleep))
+    time.sleep(real_sleep)
 
     ## Start over, no need to set startup_time
     try:

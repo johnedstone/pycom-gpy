@@ -171,7 +171,14 @@ def get_gps_info(report_choice):
 
         time.sleep(1)
         l76 = L76GNSS(py, timeout=30, buffer=512)
-        coord = l76.coordinates()
+        got_it = False
+        counter = 1
+        while not got_it:
+            coord = l76.coordinates()
+            counter +=1
+            print('counter: {}, coord: {} '.format(counter, coord))
+            if coord != (None, None):
+                got_it = True
     except Exception as e:
         print('get_gps_info: {}'.format(e))
     finally:
