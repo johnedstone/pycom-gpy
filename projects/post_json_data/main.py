@@ -8,6 +8,7 @@ import time
 
 from machine import RTC
 from network import LTE
+from pycoproc_2 import Pycoproc
 
 from helper_functions import (
     attach_lte,
@@ -26,14 +27,15 @@ rtc = RTC()
 lte = LTE()
 IMEI = lte.imei()
 
-choices = { 1: 'pytrack',
-            2: 'pysense', # pysense didn't seem reliable, ignore
-            3: 'other',
-          }
-
-report_choice = choices[1]
-
 print('Starting "post_json_data project"')
+
+try:
+    py = Pycoproc()
+    if py.read_product_id() != Pycoproc.USB_PID_PYTRACK:
+        raise Exception('Not a Pytrack')
+    time.sleep(1)
+except Exception as e:
+    print("No Pytrack: {}".format(e))
 
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
@@ -46,7 +48,7 @@ while True:
         now = rtc.now()
         t0 = time.time()
         uptime = convert_time(time.mktime(now) - startup_time)
-        coord = get_gps_info(report_choice)
+        coord = get_gps_info(py)
         print('coord: {}'.format(coord))
         make_request(uptime, IMEI, startup_time, coord)
     

@@ -8,7 +8,6 @@ import machine
 import private_vars
 
 from L76GNSS import L76GNSS
-from pycoproc_2 import Pycoproc
 
 def convert_time(seconds):
     """
@@ -156,20 +155,11 @@ def make_request (uptime, IMEI, start_time, coord):
         print("make_request error: {}".format(e))
 
 
-def get_gps_info(report_choice):
+def get_gps_info(py):
     '''
     https://github.com/pycom/pycom-libraries/blob/master/shields/pytrack_2.py
     '''
-    coord = ('0', '0')
-    if report_choice != 'pytrack':
-        return coord
-
     try:
-        py = Pycoproc()
-        if py.read_product_id() != Pycoproc.USB_PID_PYTRACK:
-            raise Exception('Not a Pytrack')
-
-        time.sleep(1)
         l76 = L76GNSS(py, timeout=30, buffer=512)
         coord = l76.coordinates()
         #got_it = False
