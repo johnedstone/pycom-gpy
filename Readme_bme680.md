@@ -1,16 +1,17 @@
 ### Pinout for PyTrack v2, GPy, and (Adafruit) bme680
 #### Pytrack v2 and GPy
 J5 Pytrack and see GPy minimal required circuit:
-* #1: (first) reset
-* #2 and #3: Rx/Tx
-* #14 (last) Safe boot button
+* Module pin #1: (first) reset
+* Module pin #2 and #3: Rx/Tx
+* Module pin #11, P9: based on code `def wake_up`
+* Module pin #14 (last) Safe boot button
 
 J6 Pytrack and see GPy minimal required circuit:
-* #1 (first) 5V
-* #2 3.3 V out
-* #3 Ground
-* #5 and #6: SDA/SDL (IC2)
-* #12, #13, #14: (last) not sure these are needed (see documentation)
+* Module pin #1 (first) 5V
+* Module pin #2 3.3 V out
+* Module pin #3 Ground
+* Module pin #5 and #6: SDA/SDL (IC2) `lib/pycoproc_2.py:    def __init__(self, i2c=None, sda='P22', scl='P21')`
+* Module pin #12, #13, #14: (last) not sure these are needed (see documentation)
 
 
 ### References

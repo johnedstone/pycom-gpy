@@ -27,7 +27,7 @@ lte = LTE()
 IMEI = lte.imei()
 
 choices = { 1: 'pytrack',
-            2: 'pysense',
+            2: 'pysense', # pysense didn't seem reliable, ignore
             3: 'other',
           }
 
