@@ -3,7 +3,10 @@
 Follow pinout for [Pytrack v2 pdf](https://docs.pycom.io/gitbook/assets/PyTrack2X_specsheet.pdf)
 except for the 3 `SD_` pins
 
-### References
+####
+See also [`simple_files/bme680/Readme.md`](https://github.com/johnedstone/pycom-gpy/tree/main/simple_files/bme680)
+
+#### References
 * https://github.com/robert-hh/BME680-Micropython
 * https://docs.pycom.io/tutorials/hardware/i2c/ 
 * https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/overview and following pages
