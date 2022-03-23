@@ -1,4 +1,8 @@
 ### Pinout for PyTrack v2, GPy, and (Adafruit) bme680
+
+#### Pysense v2
+23-Mar-2022: revisited, and this board seems to be okay
+
 #### Pytrack v2 and GPy
 Follow pinout for [Pytrack v2 pdf](https://docs.pycom.io/gitbook/assets/PyTrack2X_specsheet.pdf)
 except for the 3 `SD_` pins
