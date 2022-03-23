@@ -5,6 +5,7 @@
 * using Pytracker v2 from Pycom
 * Pinned out Pytracker per documentation [link, section 5.2 "Module (WiPy, GPy or LoPy) socket pinout", page 07, except for the 3 `SD_` pins](https://docs.pycom.io/gitbook/assets/PyTrack2X_specsheet.pdf)
 * Added bme680 to P20 (sda) and P19 (sdc)
+* [pressure to altitude](https://cdn-learn.adafruit.com/downloads/pdf/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas.pdf)
 
 ```
 >>> from machine import I2C
@@ -29,5 +30,9 @@
 971.7263
 >>> bme.gas
 1130
->>>
+>>> bme.sea_level_pressure = 1013.25
+>>> temperature_offset = -5
+>>> bme.altitude
+351.6285
+
 ```
