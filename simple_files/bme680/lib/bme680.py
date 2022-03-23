@@ -1,3 +1,6 @@
+"""
+Reference: https://github.com/robert-hh/BME680-Micropython
+"""
 # The MIT License (MIT)
 #
 # Copyright (c) 2017 ladyada for Adafruit Industries
