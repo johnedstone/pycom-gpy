@@ -1,5 +1,9 @@
 ### Pinout for PyTrack v2, GPy, and (Adafruit) bme680
 
+####
+* See most importantly [this test script]()
+* See also [`simple_files/bme680/Readme.md`](https://github.com/johnedstone/pycom-gpy/tree/main/simple_files/bme680)
+
 #### Pysense v2
 23-Mar-2022: revisited, and this board seems to be okay
 

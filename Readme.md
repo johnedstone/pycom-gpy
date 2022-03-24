@@ -3,7 +3,8 @@ Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django R
 * Using a Hologram.io SIM
 
 ### Current project 
-Currently `post_json_data` reports uptime and GPS every hour.
+Currently using `post_json_data` which reports uptime and GPS every hour using GPy and Pytack v2
+Working on adding Pysense and bme680 from Adafruit. See [for example](https://github.com/johnedstone/pycom-gpy/blob/main/Readme_bme680.md)
 
 ### Firmware
 * Upgrade Pytrack 2 firmware as described at this [link](https://docs.pycom.io/updatefirmware/expansionboard/)
@@ -115,6 +116,8 @@ screen /dev/ttyACM0 115200 -hupc
 screen -dmS test -L /dev/ttyACM0 115200
 screen -S test -X colon "logfile flush 0^M"
 tail -Fn 0 screenlog.0
+#or reattach to screen
+screen -r test
 ```
 ### See related sketch
 * [Arduino related sketches MKRGSM1400 (public)](https://github.com/johnedstone/mkrgsm1400-post-json-ssl)
