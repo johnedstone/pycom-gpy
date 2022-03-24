@@ -1,7 +1,7 @@
 ### Pinout for PyTrack v2, GPy, and (Adafruit) bme680
 
 ####
-* See most importantly [this test script]()
+* See most importantly [this test script](https://github.com/johnedstone/pycom-gpy/blob/main/simple_files/gps_bme680__pytrack_pysensetest/lib/breadboard.py)
 * See also [`simple_files/bme680/Readme.md`](https://github.com/johnedstone/pycom-gpy/tree/main/simple_files/bme680)
 
 #### Pysense v2
