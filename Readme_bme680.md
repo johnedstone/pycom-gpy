@@ -1,18 +1,11 @@
-### Pinout for PyTrack v2, GPy, and (Adafruit) bme680
+### Pinout for PyTrack v2, GPy, and bme680 (Adafruit)
 
 ####
-* See most importantly [this test script](https://github.com/johnedstone/pycom-gpy/blob/main/simple_files/gps_bme680__pytrack_pysensetest/lib/breadboard.py)
+* See most importantly [this test script](https://github.com/johnedstone/pycom-gpy/blob/main/simple_files/gps_bme680_test/lib/breadboard.py)
 * See also [`simple_files/bme680/Readme.md`](https://github.com/johnedstone/pycom-gpy/tree/main/simple_files/bme680)
 
-#### Pysense v2
-23-Mar-2022: revisited, and this board seems to be okay
-
-#### Pytrack v2 and GPy
-Follow pinout for [Pytrack v2 pdf](https://docs.pycom.io/gitbook/assets/PyTrack2X_specsheet.pdf)
-except for the 3 `SD_` pins
-
-####
-See also [`simple_files/bme680/Readme.md`](https://github.com/johnedstone/pycom-gpy/tree/main/simple_files/bme680)
+#### Pinout
+* See header, for example, [for this test script](https://github.com/johnedstone/pycom-gpy/blob/main/simple_files/gps_bme680_test/lib/breadboard.py)
 
 #### References
 * https://github.com/robert-hh/BME680-Micropython

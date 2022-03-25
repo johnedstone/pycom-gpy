@@ -28,6 +28,7 @@ Connection:
     ----------------------------------------
     *tP0 --- gP0 UART_RX
     *tP1 --- gP1 UART_TX
+    *tP9 --- gP9 (used for Pycoproc.wake_up()
     *t5V (VCC module J6 pin 1) --- gVIN (3.5-5.5V) (module pin 28)
     *tGND (GND module J6 pin 2) -- gGND (module pin 27)
     *t3V3 (3V3_MOD module J6 pin 3) --- g3.3V out (module pin 26)
@@ -44,10 +45,6 @@ Connection:
     bSDO --- gP14 (MISO GPy default for SPI)
     bSDI --- gP11 (MOSI Gpy default for SPI)
     bCS --- gP8 (a free digital pin, per adafruit bme280 documentation above)
-
-    Pysense v2 connected to GPY by I2C on breadboard
-    ------------------------------------------------
-    ...next
 
 """
 from machine import I2C, SPI, Pin

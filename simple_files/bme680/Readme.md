@@ -1,4 +1,5 @@
 #### Notes
+* For an I2C connection read the concepts below
 * using the bme680 library [link](https://github.com/robert-hh/BME680-Micropython)
 * using bme680  board from Adafruit [link](https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/arduino-wiring-test)
 * using GPy from Pycom
