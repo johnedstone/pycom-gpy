@@ -1,5 +1,6 @@
 """
-Purpose: connecting GPy, Pytrack v2 (powered by USB), Pysense v2 from Pycom.io, and bme680 from Adafruit using a breadboard
+Purpose: connecting GPy, Pytrack v2 (powered by USB), Pysense v2
+         from Pycom.io, and bme680 from Adafruit using a breadboard
 
 Ref:
     [for the Adafruit bme680 library](https://github.com/robert-hh/BME680-Micropython)
@@ -7,10 +8,18 @@ Ref:
     [for Pycom source code](https://github.com/pycom/pycom-libraries/)
 
 Key:
-    tP0 = P0 pin on the Pytracker v2, [which is module pin 2 (J5) UART_RX per documentation](https://docs.pycom.io/gitbook/assets/PyTrack2X_specsheet.pdf)
-    gP0 = P0 pin on GPy, [which is module pin 2](https://docs.pycom.io/gitbook/assets/specsheets/Pycom_002_Specsheets_GPy_v2.pdf)
-    bVIN = bme680 VIN pin [Adafruit bme680](https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/python-circuitpython)
-    sP0 = P0 pin on Pysense v2, [which is module pin 2 (J5) UART_RX per documentation](https://docs.pycom.io/gitbook/assets/PySense2X_specsheet.pdf)
+    tP0 = P0 pin on the Pytracker v2,
+        which is module pin 2 (J5) UART_RX per documentation -
+        https://docs.pycom.io/gitbook/assets/PyTrack2X_specsheet.pdf
+
+    gP0 = P0 pin on GPy,
+        which is module pin 2 - https://docs.pycom.io/gitbook/assets/specsheets/Pycom_002_Specsheets_GPy_v2.pdf
+
+    bVIN = bme680 VIN pin, bme680 is from Adafruit - 
+        https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/python-circuitpython
+
+    sP0 = P0 pin on Pysense v2,
+        which is module pin 2 (J5) UART_RX per documentation - https://docs.pycom.io/gitbook/assets/PySense2X_specsheet.pdf
 
     * means these pins would line up, if the two were stacked
 
@@ -34,7 +43,7 @@ Connection:
     bSCK --- gP10 (SCK GPy default for SPI)
     bSDO --- gP14 (MISO GPy default for SPI)
     bSDI --- gP11 (MOSI Gpy default for SPI)
-    bCS --- gP9 (a free digital pin, per adafruit bme280 documentation above)
+    bCS --- gP8 (a free digital pin, per adafruit bme280 documentation above)
 
     Pysense v2 connected to GPY by I2C on breadboard
     ------------------------------------------------
@@ -62,7 +71,7 @@ def repl_test():
     # bme680 SPI
     # this uses the SPI default pins for CLK, MOSI and MISO (``P10``, ``P11`` and ``P14``)
     spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0)
-    cs = Pin('P9', Pin.OUT, value=1)
+    cs = Pin('P8', Pin.OUT, value=1)
     bme = BME680_SPI(spi, cs)
     bme.sea_level_pressure = 1013.25
     temperature_offset = -5
