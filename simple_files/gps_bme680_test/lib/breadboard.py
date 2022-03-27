@@ -26,6 +26,7 @@ Key:
 Connection:
     Pytracker v2 connected to GPy by I2C bus on breadboard
     ----------------------------------------
+    *tReset --- gReset
     *tP0 --- gP0 UART_RX
     *tP1 --- gP1 UART_TX
     *tP9 --- gP9 (used for Pycoproc.wake_up()
