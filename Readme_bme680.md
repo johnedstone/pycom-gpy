@@ -2,7 +2,7 @@
 
 ####
 * See most importantly [this test script](https://github.com/johnedstone/pycom-gpy/blob/main/simple_files/gps_bme680_test/lib/breadboard.py)
-    * Run this breadboard with an empty main.py
+    * Run this breadboard with an empty main.py from REPL
     ```
     import breadboard
     breadboard.repl_test()
