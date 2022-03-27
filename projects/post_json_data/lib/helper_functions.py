@@ -8,6 +8,7 @@ import machine
 import private_vars
 
 from L76GNSS import L76GNSS
+from pycoproc_2 import Pycoproc
 
 def convert_time(seconds):
     """
@@ -102,15 +103,22 @@ def get_IMEI(lte, IMEI):
         print("get_IMEI error #2: {}".format(e))
 
 
-def make_request (uptime, IMEI, start_time, coord):
+def make_request (uptime, IMEI, start_time, coord, bme_data=None):
     try:
-        posting = json.dumps({
+        data_to_send = {
             'uptime': uptime,
             'imei_string': IMEI,
             'start_time': start_time,
             'latitude': coord[0],
             'longitude': coord[1],
-            })
+        }
+
+        if bme_data:
+            keys_to_use = list(filter(None, bme_data.keys()))
+            for ea in keys_to_use:
+                data_to_send[ea] = bme_data[ea]
+
+        posting = json.dumps(data_to_send)
 
         s = socket.socket()
         ai = socket.getaddrinfo(private_vars.HOST, 443)
@@ -155,21 +163,19 @@ def make_request (uptime, IMEI, start_time, coord):
         print("make_request error: {}".format(e))
 
 
-def get_gps_info(py):
+def get_gps_info():
     '''
     https://github.com/pycom/pycom-libraries/blob/master/shields/pytrack_2.py
     '''
+    coord = (None, None)
     try:
+        py = Pycoproc()
+        if py.read_product_id() != Pycoproc.USB_PID_PYTRACK:
+            raise Exception('Not a Pytrack')
+
+        time.sleep(1)
         l76 = L76GNSS(py, timeout=30, buffer=512)
         coord = l76.coordinates()
-        #got_it = False
-        #counter = 1
-        #while not got_it:
-        #    coord = l76.coordinates()
-        #    counter +=1
-        #    print('counter: {}, coord: {} '.format(counter, coord))
-        #    if coord != (None, None):
-        #        got_it = True
     except Exception as e:
         print('get_gps_info: {}'.format(e))
     finally:

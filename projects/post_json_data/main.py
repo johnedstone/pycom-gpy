@@ -2,13 +2,12 @@
 Device:
     Gpy (firmware, latest: shipped with CAT-M1 5.4.1.0-50523) on
     Pytrack 2 (firmware, latest: pytrack2_v16.dfu)
-    Not yet: Pysense 2 (firmware, latest: pysense2_v16.dfu)
+    Devices stacked
 """
 import time
 
 from machine import RTC
 from network import LTE
-from pycoproc_2 import Pycoproc
 
 from helper_functions import (
     attach_lte,
@@ -29,14 +28,6 @@ IMEI = lte.imei()
 
 print('Starting "post_json_data project"')
 
-try:
-    py = Pycoproc()
-    if py.read_product_id() != Pycoproc.USB_PID_PYTRACK:
-        raise Exception('Not a Pytrack')
-    time.sleep(1)
-except Exception as e:
-    print("No Pytrack: {}".format(e))
-
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
 
@@ -48,7 +39,7 @@ while True:
         now = rtc.now()
         t0 = time.time()
         uptime = convert_time(time.mktime(now) - startup_time)
-        coord = get_gps_info(py)
+        coord = get_gps_info()
         print('coord: {}'.format(coord))
         make_request(uptime, IMEI, startup_time, coord)
     
