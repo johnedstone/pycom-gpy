@@ -26,15 +26,8 @@ Key:
 Connection:
     Pytracker v2 connected to GPy by I2C bus on breadboard
     ----------------------------------------
-    *tReset --- gReset
     *tP0 --- gP0 UART_RX
     *tP1 --- gP1 UART_TX
-    *tP2 --- gP2 (per PyTracker documentation)
-
-    *tP9 --- gP9 (per PyTracker documentation)
-    *tP10 --- gP10 (per PyTracker documentation)
-    *tP11 --- gP11 (per PyTracker documentation)
-    *t(not marked as P) (module j5 pin 14)  --- gP12 (per PyTracker documentation)
 
     *t5V (VCC module J6 pin 1) --- gVIN (3.5-5.5V) (module pin 28)
     *tGND (GND module J6 pin 2) -- gGND (module pin 27)
@@ -43,22 +36,22 @@ Connection:
     *tP21 (SCL module pin J6 6) SCl --- gP21
 
 
-    bme680 on breadboard connected to GPY by SPI on breadboard
+    bme680 on breadboard connected to GPY by I2C on breadboard
     [reference for pinout](https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/python-circuitpython-test)
     ------------------------------
     bVIN --- gVIN (3.5-5.5V) (module pin 28)
     bGND --- gGND (module pin 27)
-    bSCK --- gP4 
-    bSDO --- gP19 (MISO)
-    bSDI --- gP20 (MOSI)
-    bCS  --- gP3
+
+    bSCK --- gP4  (SCL)
+    bSDI --- gP3  (SDA)
+
+    bCS  --- gP8
 
 """
-from machine import I2C, SPI, Pin
-
+from machine import I2C
 from pycoproc_2 import Pycoproc
 from L76GNSS import L76GNSS
-from bme680 import BME680_SPI
+from bme680 import BME680_I2C
 
 def repl_test():
     return_list = []
@@ -72,11 +65,15 @@ def repl_test():
     return_list.append('GPS coordinates: {}'.format(l76.coordinates()))
 
 
-    # bme680 SPI
-    # this uses the SPI not default pins for CLK, MOSI and MISO ('P4', 'P20' and ``P19``)
-    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P4','P20','P19'))
-    cs = Pin('P3', Pin.OUT, value=1)
-    bme = BME680_SPI(spi, cs)
+    # bme680 I2C 
+    # [pinout](https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/python-circuitpython-test)
+
+    # GPy SCL to sensor SCK
+    # GPy SDA to sensor SDI
+    i2c1 = I2C(1, mode=I2C.MASTER, pins=('P3', 'P4'))
+    py1 = Pycoproc(i2c=i2c1, sda='P3', scl='P4')
+    cs = Pin('P8', Pin.OUT, value=1)
+    bme = BME680_I2C(py1, cs)
     bme.sea_level_pressure = 1013.25
     temperature_offset = -5
 

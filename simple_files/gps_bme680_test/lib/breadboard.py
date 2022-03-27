@@ -26,15 +26,8 @@ Key:
 Connection:
     Pytracker v2 connected to GPy by I2C bus on breadboard
     ----------------------------------------
-    *tReset --- gReset
     *tP0 --- gP0 UART_RX
     *tP1 --- gP1 UART_TX
-    *tP2 --- gP2 (per PyTracker documentation)
-
-    *tP9 --- gP9 (per PyTracker documentation)
-    *tP10 --- gP10 (per PyTracker documentation)
-    *tP11 --- gP11 (per PyTracker documentation)
-    *t(not marked as P) (module j5 pin 14)  --- gP12 (per PyTracker documentation)
 
     *t5V (VCC module J6 pin 1) --- gVIN (3.5-5.5V) (module pin 28)
     *tGND (GND module J6 pin 2) -- gGND (module pin 27)
