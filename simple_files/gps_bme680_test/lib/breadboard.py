@@ -29,12 +29,18 @@ Connection:
     *tReset --- gReset
     *tP0 --- gP0 UART_RX
     *tP1 --- gP1 UART_TX
-    *tP9 --- gP9 (used for Pycoproc.wake_up()
+    *tP2 --- gP2 (per PyTracker documentation)
+
+    *tP9 --- gP9 (per PyTracker documentation)
+    *tP10 --- gP10 (per PyTracker documentation)
+    *tP11 --- gP11 (per PyTracker documentation)
+    *t(not marked as P) (module j5 pin 14)  --- gP12 (per PyTracker documentation)
+
     *t5V (VCC module J6 pin 1) --- gVIN (3.5-5.5V) (module pin 28)
     *tGND (GND module J6 pin 2) -- gGND (module pin 27)
     *t3V3 (3V3_MOD module J6 pin 3) --- g3.3V out (module pin 26)
-    *tP22 (SDA module pin J6 5)
-    *tP21 (SCL module pin J6 6)
+    *tP22 (SDA module pin J6 5) SDA --- gP22 
+    *tP21 (SCL module pin J6 6) SCl --- gP21
 
 
     bme680 on breadboard connected to GPY by SPI on breadboard
@@ -42,10 +48,10 @@ Connection:
     ------------------------------
     bVIN --- gVIN (3.5-5.5V) (module pin 28)
     bGND --- gGND (module pin 27)
-    bSCK --- gP10 (SCK GPy default for SPI)
-    bSDO --- gP14 (MISO GPy default for SPI)
-    bSDI --- gP11 (MOSI Gpy default for SPI)
-    bCS --- gP8 (a free digital pin, per adafruit bme280 documentation above)
+    bSCK --- gP4 
+    bSDO --- gP19 (MISO)
+    bSDI --- gP20 (MOSI)
+    bCS  --- gP3
 
 """
 from machine import I2C, SPI, Pin
@@ -67,9 +73,9 @@ def repl_test():
 
 
     # bme680 SPI
-    # this uses the SPI default pins for CLK, MOSI and MISO (``P10``, ``P11`` and ``P14``)
-    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0)
-    cs = Pin('P8', Pin.OUT, value=1)
+    # this uses the SPI not default pins for CLK, MOSI and MISO ('P4', 'P20' and ``P19``)
+    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P4','P20','P19'))
+    cs = Pin('P3', Pin.OUT, value=1)
     bme = BME680_SPI(spi, cs)
     bme.sea_level_pressure = 1013.25
     temperature_offset = -5

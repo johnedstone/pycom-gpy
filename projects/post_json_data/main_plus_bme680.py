@@ -1,13 +1,21 @@
 """
 Device:
-    Gpy (firmware, latest: shipped with CAT-M1 5.4.1.0-50523) on
+    GPy (firmware, latest: shipped with CAT-M1 5.4.1.0-50523) on
     Pytrack 2 (firmware, latest: pytrack2_v16.dfu)
-    Not yet: Pysense 2 (firmware, latest: pysense2_v16.dfu)
+    Devices stacked
+
+    or if using Adafruit's bme680
+        Pytrack v2 is standalone
+        and GPy and bme680 are on a breadboard
+        Pinout can be found in lib/helper_bme680.py
 """
+USING_BME680 = False
+
 import time
 
 from machine import RTC
 from network import LTE
+from pycoproc_2 import Pycoproc
 
 from helper_functions import (
     attach_lte,
@@ -17,6 +25,8 @@ from helper_functions import (
     get_gps_info,
     )
 
+if USING_BME680:
+    from helper_bme680 import get_bme680_data
 
 sleeping = 3600 # 1 hour
 #sleeping = 900 # 15 min
@@ -26,14 +36,15 @@ rtc = RTC()
 lte = LTE()
 IMEI = lte.imei()
 
-choices = { 1: 'pytrack',
-            2: 'pysense',
-            3: 'other',
-          }
-
-report_choice = choices[1]
-
 print('Starting "post_json_data project"')
+
+try:
+    py = Pycoproc()
+    if py.read_product_id() != Pycoproc.USB_PID_PYTRACK:
+        raise Exception('Not a Pytrack')
+    time.sleep(1)
+except Exception as e:
+    print("No Pytrack: {}".format(e))
 
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
@@ -46,8 +57,15 @@ while True:
         now = rtc.now()
         t0 = time.time()
         uptime = convert_time(time.mktime(now) - startup_time)
-        coord = get_gps_info(report_choice)
+        coord = get_gps_info(py)
         print('coord: {}'.format(coord))
+        """
+        if USING_BME680:
+            bme_data = get_bme_data()
+            make_request(uptime, IMEI, startup_time, coord, bme_data)
+        else:
+            make_request(uptime, IMEI, startup_time, coord)
+            """
         make_request(uptime, IMEI, startup_time, coord)
     
         lte.deinit(reset=True)
