@@ -3,17 +3,14 @@
 ####
 * See most importantly [this test script](https://github.com/johnedstone/pycom-gpy/blob/main/simple_files/gps_bme680_test/lib/breadboard.py)
     * Run this breadboard with an empty main.py from REPL
-    * Sometimes Ctrl-F doesn't clear the previous main.py, if deleted with `os.remove('main.py')`,
-      so simply power cycle after removing main.py and then run the following code
+    * Sometimes Ctrl-F doesn't clear the previous main.py. If main.py has just been deleted with `os.remove('main.py')`,
+      then simply power cycle run the following code
     ```
-    import breadboard
-    breadboard.repl_test()
+    import breadboard # for SPI
     # or
-    import breadboard
-    import time
-    for _ in range(10000):
-        breadboard.repl_test()
-        time.sleep(600) # 10min
+    # import breadboard_i2c as breadboard # for I2C after changing cabling
+    breadboard.repl_test()
+    breadboard.repl_test()
     ```
 * See also [`simple_files/bme680/Readme.md`](https://github.com/johnedstone/pycom-gpy/tree/main/simple_files/bme680)
 
