@@ -24,8 +24,11 @@ Key:
     * means these pins would line up, if the two were stacked
 
 Connection:
+    Configuration #1
+    ================
     Pytracker v2 connected to GPy by I2C bus on breadboard
     ----------------------------------------
+    *tReset -- gReset (optional: appears to work either way)
     *tP0 --- gP0 UART_RX
     *tP1 --- gP1 UART_TX
 
@@ -45,7 +48,17 @@ Connection:
     bSDO --- gP19 (MISO)
     bSDI --- gP20 (MOSI)
     bCS  --- gP3
+    
+    Does this configuration work with b9e29b3:projects/post_json_data/main.py? Yes
 
+    Added back pins tP13-15 to gP13-15 as if stacked, as recommended,
+    appear to work with this script and b9e29b3:projects/post_json_data/main.py
+
+    And, then, adding back tP8-12 to gP8-12, as if stacked as recommended,
+    appear to work with this script and b9e29b3:projects/post_json_data/main.py
+
+    And then, lastly, adding back tP2 to gP2, as if stacked, as recommended,
+    appear to work with this script and b9e29b3:projects/post_json_data/main.py
 """
 from machine import I2C, SPI, Pin
 
