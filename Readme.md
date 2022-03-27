@@ -7,9 +7,9 @@ Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django R
     * reports uptime and GPS every hour using GPy and Pytack v2.
     * GPy and Pytract v2 are stacked
 * Working on using GPy, Pytrack v2, and bme680
-    * Option to use bme680 with [post_json_data project](https://github.com/johnedstone/pycom-gpy/tree/main/projects/post_json_data)
+    * Option added to use bme680 with [post_json_data project](https://github.com/johnedstone/pycom-gpy/tree/main/projects/post_json_data)
     * bme680 purchased from Adafruit. See [for example](https://github.com/johnedstone/pycom-gpy/blob/main/Readme_bme680.md)
-    * Pytrack v2 is usb powered, on a standalone platform
+    * Pytrack v2 is USB powered, on a standalone platform
     * GPy and bme680 are on a breadboard
     * Pinout can be found in lib/helper_bme680.py
     * This configuration was developed as described in [Readme_bme680.md](https://github.com/johnedstone/pycom-gpy/blob/main/Readme_bme680.md)
