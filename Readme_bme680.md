@@ -9,6 +9,7 @@
     import breadboard
     breadboard.repl_test()
     # or
+    import breadboard
     import time
     for _ in range(10000):
         breadboard.repl_test()
