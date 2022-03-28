@@ -33,13 +33,13 @@ print('Starting "post_json_data project"')
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
 
-# The following, uncommented works fine
-# print('bme680 data: {}'.format(get_bme680_data()))
+# The following, uncommented, works fine
+#print('bme680 data: {}'.format(get_bme680_data()))
 
 startup_time = time.mktime(sync_time(rtc))
 
-# The following, uncommented throws the error listed below: 
-print('bme680 data: {}'.format(get_bme680_data()))
+# The following, uncommented, throws the error listed below: 
+#print('bme680 data: {}'.format(get_bme680_data()))
 """
 Traceback (most recent call last):
   File "main.py", line 42, in <module>

@@ -446,3 +446,5 @@ class BME680_SPI(Adafruit_BME680):
             spi_mem_page = 0x10
         self._write(_BME680_REG_PAGE_SELECT, [spi_mem_page])
 
+
+# vim: ai et ts=4 sts=4 sw=4 nu
