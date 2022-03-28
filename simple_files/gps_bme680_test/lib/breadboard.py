@@ -27,6 +27,8 @@ Connection:
     Configuration #1
     ================
     Pytracker v2 connected to GPy by I2C bus on breadboard
+    Pytracker v2 powered by USB
+    bme680 connected to GPy by SPI
     ----------------------------------------
     *tReset -- gReset (optional: appears to work either way)
     *tP0 --- gP0 UART_RX

@@ -33,10 +33,21 @@ print('Starting "post_json_data project"')
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
 
-# Moving this after startup_time below causes the error, unsupported type for __mul__
+# The following, uncommented works fine
 # print('bme680 data: {}'.format(get_bme680_data()))
 
 startup_time = time.mktime(sync_time(rtc))
+
+# The following, uncommented throws the error listed below: 
+print('bme680 data: {}'.format(get_bme680_data()))
+"""
+Traceback (most recent call last):
+  File "main.py", line 42, in <module>
+  File "/flash/lib/helper_bme680.py", line 20, in get_bme680_data
+  File "/flash/lib/bme680.py", line 195, in temperature
+TypeError: unsupported types for __mul__: 'NoneType', 'int'
+"""
+
 print('Startup time is {}'.format(startup_time))
 
 while True:
