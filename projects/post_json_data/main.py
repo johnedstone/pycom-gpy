@@ -2,7 +2,6 @@
 Device:
     Gpy (firmware, latest: shipped with CAT-M1 5.4.1.0-50523) on
     Pytrack 2 (firmware, latest: pytrack2_v16.dfu)
-    Devices stacked
 """
 import time
 
@@ -15,8 +14,11 @@ from helper_functions import (
     sync_time,
     convert_time,
     get_gps_info,
-    )
+)
 
+from helper_bme680 import (
+    get_bme680_data,
+)
 
 sleeping = 3600 # 1 hour
 #sleeping = 900 # 15 min
@@ -31,6 +33,9 @@ print('Starting "post_json_data project"')
 attach_lte(lte)
 print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.isconnected()))
 
+# Moving this after startup_time below causes the error, unsupported type for __mul__
+# print('bme680 data: {}'.format(get_bme680_data()))
+
 startup_time = time.mktime(sync_time(rtc))
 print('Startup time is {}'.format(startup_time))
 
@@ -42,7 +47,7 @@ while True:
         coord = get_gps_info()
         print('coord: {}'.format(coord))
         make_request(uptime, IMEI, startup_time, coord)
-    
+
         lte.deinit(reset=True)
 
         print(uptime)
