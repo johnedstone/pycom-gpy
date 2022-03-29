@@ -10,7 +10,10 @@ def get_bme680_data():
         'altitude': None,
         }
 
-    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P4','P20','P19'))
+    # Configuration #1: see breadboard.py
+    #spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P4','P20','P19'))
+    # Configuration #2: see breadboard.py
+    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P20','P19','P18'))
     cs = Pin('P3', Pin.OUT, value=1)
     bme = BME680_SPI(spi, cs)
 

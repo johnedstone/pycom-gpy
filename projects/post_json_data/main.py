@@ -38,7 +38,8 @@ print("Is lte attached and connected: {} and {}".format(lte.isattached(), lte.is
 
 startup_time = time.mktime(sync_time(rtc))
 
-# The following, uncommented, throws the error listed below: 
+# The following, uncommented, throws the error listed below
+# with both pinout configuration as described in breadboard.py
 #print('bme680 data: {}'.format(get_bme680_data()))
 """
 Traceback (most recent call last):

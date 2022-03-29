@@ -61,6 +61,30 @@ Connection:
 
     And then, lastly, adding back tP2 to gP2, as if stacked, as recommended,
     appear to work with this script and b9e29b3:projects/post_json_data/main.py
+
+    Configuration #2: this pinout runs as above That is, successful with breadboard run from REPL as
+    ================
+        import breadboard
+        breadboard.repl_test()
+    And, runs with the current main.py succesfully
+    Pytracker v2 connected to GPy by I2C bus on breadboard
+    Pytracker v2 powered by USB
+    bme680 connected to GPy by SPI
+    Using all of the recommened cabling as described in the Pytrack v2 documentaion
+    ----------------------------------------
+    PyTracker --- GPy on J5 module pins 1, 2(P0), 3, 4, 6, 10, 11. 12, 13, 14(P12)
+    PyTracker --- GPy on J6 module pins 1(VIN), 2, 3, 4, 5, 6, 12, 13, 14(P13)
+
+    bme680 on breadboard connected to GPY by SPI on breadboard
+    [reference for pinout](https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/python-circuitpython-test)
+    ------------------------------
+    bVIN --- gVIN (3.5-5.5V) (module pin 28)
+    bGND --- gGND (module pin 27)
+    bSCK --- gP20
+    bSDO --- gP18 (MISO)
+    bSDI --- gP19 (MOSI)
+    bCS  --- gP3
+
 """
 from machine import I2C, SPI, Pin
 
@@ -80,10 +104,18 @@ def repl_test():
     return_list.append('GPS coordinates: {}'.format(l76.coordinates()))
 
 
-    # bme680 SPI
+    ######  bme680 SPI  ######################
+
+    # Configuration #1
     # this uses the SPI not default pins for CLK, MOSI and MISO ('P4', 'P20' and ``P19``)
-    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P4','P20','P19'))
-    cs = Pin('P3', Pin.OUT, value=1)
+    #spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P4','P20','P19'))
+
+    # Configuration #2
+    # this uses the SPI not default pins for CLK, MOSI and MISO ('P20', 'P19' and ``P18``)
+    spi = SPI(0, mode=SPI.MASTER, baudrate=2000000, polarity=0, phase=0, pins=('P20','P19','P18'))
+
+    cs = Pin('P3', Pin.OUT, value=1) # same for both configurations
+
     bme = BME680_SPI(spi, cs)
     bme.sea_level_pressure = 1013.25
     temperature_offset = -5
