@@ -1,7 +1,7 @@
-"""
-Reference: https://github.com/robert-hh/BME680-Micropython
-https://github.com/robert-hh/BME680-Micropython/blob/3788dc4ef917cc96ce6b1df261a0f9ebec69b2c8/bme680.py
-"""
+# https://github.com/robert-hh/BME680-Micropython
+# https://github.com/robert-hh/BME680-Micropython/blob/3788dc4ef917cc96ce6b1df261a0f9ebec69b2c8/bme680.py
+# Plus patch suggested at https://github.com/robert-hh/BME680-Micropython/issues/4 to fix time_sleep_ms
+#
 # The MIT License (MIT)
 #
 # Copyright (c) 2017 ladyada for Adafruit Industries
@@ -73,11 +73,6 @@ _BME680_REG_HDATA = const(0x25)
 _BME680_SAMPLERATES = (0, 1, 2, 4, 8, 16)
 _BME680_FILTERSIZES = (0, 1, 3, 7, 15, 31, 63, 127)
 
-_POLL_PERIOD_MS = 10
-
-_MODE_MSK = 0x03
-_MODE_POS = 0
-
 _BME680_RUNGAS = const(0x10)
 
 _LOOKUP_TABLE_1 = (2147483647.0, 2147483647.0, 2147483647.0, 2147483647.0, 2147483647.0,
@@ -138,8 +133,8 @@ class Adafruit_BME680:
         self._gas_range = None
         self._t_fine = None
 
-        self._last_reading = 0
-        self._min_refresh_time = 1000 / refresh_rate
+        self._last_reading = time.ticks_ms()
+        self._min_refresh_time = 1000 // refresh_rate
 
     @property
     def pressure_oversample(self):
@@ -264,9 +259,9 @@ class Adafruit_BME680:
     def _perform_reading(self):
         """Perform a single-shot reading from the sensor and fill internal data structure for
            calculations"""
-        if (time.ticks_diff(self._last_reading, time.ticks_ms()) * time.ticks_diff(0, 1)
-                < self._min_refresh_time):
-            return
+        expired = time.ticks_diff(self._last_reading, time.ticks_ms()) * time.ticks_diff(0, 1)
+        if 0 <= expired < self._min_refresh_time:
+            time.sleep_ms(self._min_refresh_time - expired)
 
         # set filter
         self._write(_BME680_REG_CONFIG, [self._filter << 2])
@@ -327,30 +322,11 @@ class Adafruit_BME680:
         """Read a byte register value and return it"""
         return self._read(register, 1)[0]
 
-    # these functions are ported from Pimoroni library 
-    def set_power_mode(self, value, blocking=True):
-        """Set power mode."""
-        if value not in (0, 1):
-            raise ValueError('Power mode should be one of SLEEP_MODE or FORCED_MODE')
+    def _read(self, register, length):
+        raise NotImplementedError()
 
-        self.power_mode = value
-
-        self._set_bits(_BME680_REG_CTRL_MEAS, _MODE_MSK, _MODE_POS, value)
-
-        while blocking and self.get_power_mode() != self.power_mode:
-            time.sleep(_POLL_PERIOD_MS / 1000.0)
-
-    def get_power_mode(self):
-        """Get power mode."""
-        self.power_mode = self._read(_BME680_REG_CTRL_MEAS, 1)
-        return self.power_mode
-
-    def _set_bits(self, register, mask, position, value):
-        """Mask out and set one or more bits in a register."""
-        temp = self._read(register, 1)[0]
-        temp &= ~mask
-        temp |= value << position
-        self._write(register, [temp])
+    def _write(self, register, values):
+        raise NotImplementedError()
 
 class BME680_I2C(Adafruit_BME680):
     """Driver for I2C connected BME680.
@@ -382,6 +358,7 @@ class BME680_I2C(Adafruit_BME680):
         for value in values:
             self._i2c.writeto_mem(self._address, register, bytearray([value & 0xFF]))
             register += 1
+
 
 class BME680_SPI(Adafruit_BME680):
     """Driver for SPI connected BME680.
@@ -447,5 +424,4 @@ class BME680_SPI(Adafruit_BME680):
             spi_mem_page = 0x10
         self._write(_BME680_REG_PAGE_SELECT, [spi_mem_page])
 
-
-# vim: ai et ts=4 sts=4 sw=4 nu
+# vim: ai et ts=4 sw=4 sts=4 nu
