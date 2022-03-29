@@ -1,5 +1,6 @@
 """
 Reference: https://github.com/robert-hh/BME680-Micropython
+https://github.com/robert-hh/BME680-Micropython/blob/3788dc4ef917cc96ce6b1df261a0f9ebec69b2c8/bme680.py
 """
 # The MIT License (MIT)
 #
