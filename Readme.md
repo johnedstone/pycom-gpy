@@ -9,14 +9,6 @@ Using the GPy from Pycom.io to POST data to a REST API (in this case a [Django R
     to GPy and Pytrack v2, using a breadboard an the SPI interface.
     Many thanks to [robert-hh/BME680-Micropython](https://github.com/robert-hh/BME680-Micropython)
 
-* Working on using GPy, Pytrack v2, and bme680
-    * Option added to use bme680 with [post_json_data project](https://github.com/johnedstone/pycom-gpy/tree/main/projects/post_json_data)
-    * bme680 purchased from Adafruit. See [for example](https://github.com/johnedstone/pycom-gpy/blob/main/Readme_bme680.md)
-    * Pytrack v2 is USB powered, on a standalone platform
-    * GPy and bme680 are on a breadboard
-    * Pinout can be found in lib/helper_bme680.py
-    * This configuration was developed as described in [Readme_bme680.md](https://github.com/johnedstone/pycom-gpy/blob/main/Readme_bme680.md)
-
 ### Firmware
 * Upgrade Pytrack 2 firmware as described at this [link](https://docs.pycom.io/updatefirmware/expansionboard/)
 * Upgrade GPy as described at this [link, for USB](https://docs.pycom.io/updatefirmware/ltemodem/)
