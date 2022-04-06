@@ -83,7 +83,7 @@ Connection:
     bSCK --- gP20
     bSDO --- gP18 (MISO)
     bSDI --- gP19 (MOSI)
-    bCS  --- gP3
+    bCS  --- gP3 (module pin 5)
 
 """
 from machine import I2C, SPI, Pin
